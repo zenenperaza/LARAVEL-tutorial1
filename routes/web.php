@@ -2,39 +2,51 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::prefix('categorias')->group(function(){
 
-Route::get('categorias', function () {
-   $categorias = [
-    'Tomates',
-    'Cebollas',
-    'Pepinos',
-    'Cilnatro'
-   ];
-   foreach ($categorias as $key => $value) {
-    echo $value.'<br>';
-   }
+    Route::prefix('ofertas')->group(function(){
+        Route::get('ultimo-mes', function(){
+            echo "ofertas del ultimo mes";
+        });
+        Route::get('ultima-semana', function(){
+            echo "ofertas del ultimo semana";
+        });
+
+    });
+
+
+
+
+    Route::get('/', function () {
+        $categorias = [
+         'Tomates',
+         'Cebollas',
+         'Pepinos',
+         'Cilnatro'
+        ];
+        foreach ($categorias as $key => $value) {
+         echo $value.'<br>';
+        }
+     
+     });
+     
+     Route::get('oferta', function () {
+      echo "categoria en ofertas";
+     });
+     
+     Route::get('mas-vendidas', function () {
+        echo "categoria en mas vendidas";
+         
+     });
+     
+     Route::get('{nombreCategoria}', function (string $nombreCategoria) {
+         echo 'producto de '.$nombreCategoria;
+     });
 
 });
 
 
-// Route::get('categorias/{nombreCategoria}', function (string $nombreCategoria) {
-//     echo 'producto de '.$nombreCategoria;
-// });
-
-
 Route::get('productos/{categoria?}', function (?string $categoria = null) {
-
-
     $categorias = [
         "fideos" => [
             'caracoles',
@@ -62,9 +74,7 @@ Route::get('productos/{categoria?}', function (?string $categoria = null) {
                     echo $value.'<br>';
                 }
                 
-            } else {
-                echo 'CATEGORIA INVALIDAD';
-            }
+            } 
         }
 });
 
