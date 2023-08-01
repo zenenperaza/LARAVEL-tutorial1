@@ -1,6 +1,13 @@
 <?php
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', function(){
+    return view('welcome');
+});
 
 Route::prefix('categorias')->group(function(){
 
@@ -14,19 +21,43 @@ Route::prefix('categorias')->group(function(){
 
     });
 
+    Route::get('/', function (Request $request) {
 
-
-
-    Route::get('/', function () {
         $categorias = [
-         'Tomates',
-         'Cebollas',
-         'Pepinos',
-         'Cilnatro'
-        ];
-        foreach ($categorias as $key => $value) {
-         echo $value.'<br>';
+            "fideos" => [
+                'caracoles',
+                'fideos largos',
+                'espaguetis'
+            ],
+            "verduras" => [
+                'tomates',
+                'lechuga',
+                'ocumo'
+            ],
+            ];
+
+        if(!is_null($request->input('nombre'))){
+
+            if (array_key_exists($request->input('nombre'), $categorias)) {
+                foreach ($categorias[$request->input('nombre')] as $key => $value) {
+                    echo $value.'<br>';
+                }
+                
+            } 
+            
+        } else {
+            foreach ($categorias as $nombreCategoria => $categoria) {
+                
+                    echo $nombreCategoria.'<br>';
+            
+            }
         }
+
+        // dd($request->input('nombre'));
+
+        // foreach ($categorias as $key => $value) {
+        //  echo $value.'<br>';
+        // }
      
      });
      
@@ -42,6 +73,35 @@ Route::prefix('categorias')->group(function(){
      Route::get('{nombreCategoria}', function (string $nombreCategoria) {
          echo 'producto de '.$nombreCategoria;
      });
+
+});
+
+
+Route::get('productos/json', function(){
+    $categorias = [
+        "fideos" => [
+            'caracoles',
+            'fideos largos',
+            'espaguetis'
+        ],
+        "verduras" => [
+            'tomates',
+            'lechuga',
+            'ocumo'
+        ],
+        ];
+
+        $productos = [];
+
+        foreach ($categorias as $categoriaArray) {
+            foreach ($categoriaArray as $producto) {
+                $productos[] = $producto;
+            }
+        }
+
+        return Response::json($productos);
+
+        // dd($productos);
 
 });
 
