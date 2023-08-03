@@ -20,38 +20,7 @@ Route::prefix('categorias')->group(function(){
 });
 
 
+Route::get('productos/crear-producto', [ProductoController::class, 'crearProducto']);  
 Route::get('productos/{categoria?}', [ProductoController::class, 'index']);
-
-
-
-// Route::get('productos/json', function(){
-//     $categorias = [
-//         "fideos" => [
-//             'caracoles',
-//             'fideos largos',
-//             'espaguetis'
-//         ],
-//         "verduras" => [
-//             'tomates',
-//             'lechuga',
-//             'ocumo'
-//         ],
-//         ];
-
-//         $productos = [];
-
-//         foreach ($categorias as $categoriaArray) {
-//             foreach ($categoriaArray as $producto) {
-//                 $productos[] = $producto;
-//             }
-//         }
-
-//         return new JsonResponse($productos);
-
-//         // return Response::json($productos);
-
-//         // dd($productos);
-
-// });
-
+// Route::get('productos', [ProductoController::class, 'index']);
 

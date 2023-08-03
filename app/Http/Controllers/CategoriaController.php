@@ -25,12 +25,25 @@ class CategoriaController extends Controller
     }
 
     public function categoria(string $nombreCategoria){
-        echo 'productos de '.$nombreCategoria;
+       
+        if(!is_null($nombreCategoria)) {
+            $categorias = Categoria::where('nombre', 'LIKE', '%'.$nombreCategoria.'%')
+                ->get();
+        } else {
+            $categorias = Categoria::orderBy('nombre', 'ASC')
+                ->get();
+        }
+
+        return view('categorias', [
+            'categorias' => $categorias,
+        ]);
+
+
     }
  
     public function crearCategoria() {
         $categoria = new Categoria();
-        $categoria->nombre = "Verduras";
+        $categoria->nombre = "Lacteos";
         $categoria->save();
     }
 }

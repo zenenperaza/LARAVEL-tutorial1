@@ -2,7 +2,6 @@
 
 @section('main')
 
-
 <h3>Categorias</h3>
 <div class="container">
     <div class="row">
