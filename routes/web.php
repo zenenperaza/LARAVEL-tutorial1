@@ -14,12 +14,9 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::prefix('categorias')->group(function(){
 
-     Route::get('/', [CategoriaController::class, 'index']);
-     
-     
-     
+     Route::get('/', [CategoriaController::class, 'index']);   
+     Route::get('/crear-categoria', [CategoriaController::class, 'crearCategoria']);     
      Route::get('{nombreCategoria}', [CategoriaController::class, 'categoria']);
-
 });
 
 
