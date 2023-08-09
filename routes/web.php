@@ -5,9 +5,11 @@ use App\Http\Controllers\Backend\CategoriaController as BackendCategoriaControll
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
@@ -34,11 +36,24 @@ Route::get('productos/{categoria?}', [ProductoController::class, 'index']);
 Route::prefix('admin')->group(function(){
 
      Route::get('login', [AdminController::class, 'login']);
+
+     Route::middleware('admin-logueado')->group(function(){
      
-     Route::get('/', [AdminController::class, 'home']);
+          Route::get('/', [AdminController::class, 'home']);
+     
+          Route::resource('categorias', CategoriaController::class);
 
-     Route::resource('categorias', BackendCategoriaController::class);
+     });
 
 
+
+});
+
+Route::get('crear-usuario', function(){
+     $user = new User();
+     $user->name = "Zenen Peraza";
+     $user->email = "peraza@outlook.com";
+     $user->password = Hash::make('123');
+     $user->save();
 
 });

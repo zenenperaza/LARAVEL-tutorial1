@@ -36,18 +36,20 @@
               <div class="card-body">
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
+                <form method="POST" action="{{ action([ App\Http\Controllers\Backend\AdminController::class, 'loguear']) }}">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend"><span class="input-group-text"><i class="icon-user"></i></span></div>
-                  <input class="form-control" type="text" placeholder="Username">
+                  <input class="form-control" name="email" type="email" placeholder="Email" autocomplete="off">
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend"><span class="input-group-text"><i class="icon-lock"></i></span></div>
-                  <input class="form-control" type="password" placeholder="Password">
+                  <input class="form-control" name="password" type="password" placeholder="Password" autocomplete="off">
                 </div>
                 <div class="row">
                   <div class="col-6">
                     <button class="btn btn-primary px-4" type="button">Login</button>
                   </div>
+                  </form>
                   <div class="col-6 text-right">
                     <button class="btn btn-link px-0" type="button">Forgot password?</button>
                   </div>
