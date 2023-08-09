@@ -38,4 +38,11 @@ class ProductoController extends Controller
         $producto->categoria_id = 3;
         $producto->save();
     }
+
+    public function verProducto(Producto $producto){
+    
+        return view('producto', [
+            'producto' => $producto,
+        ]);
+    }
 }

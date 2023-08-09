@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\CategoriaController as BackendCategoriaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
@@ -21,6 +23,22 @@ Route::prefix('categorias')->group(function(){
 
 
 Route::get('productos/crear-producto', [ProductoController::class, 'crearProducto']);  
+Route::get('productos/ver-producto/{producto}', [ProductoController::class, 'verProducto']);
 Route::get('productos/{categoria?}', [ProductoController::class, 'index']);
-// Route::get('productos', [ProductoController::class, 'index']);
 
+
+/*
+**ADMIN
+*/
+
+Route::prefix('admin')->group(function(){
+
+     Route::get('login', [AdminController::class, 'login']);
+     
+     Route::get('/', [AdminController::class, 'home']);
+
+     Route::resource('categorias', BackendCategoriaController::class);
+
+
+
+});
