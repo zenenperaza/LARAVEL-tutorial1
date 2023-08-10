@@ -35,17 +35,20 @@ Route::get('productos/{categoria?}', [ProductoController::class, 'index']);
 
 Route::prefix('admin')->group(function(){
 
-     Route::get('login', [AdminController::class, 'login']);
+     Route::middleware('admin-logueado:0')->group(function() {
+          Route::get('login', [AdminController::class, 'login']);
+          Route::post('loguear', [AdminController::class, 'loguear']);
+      });
 
-     Route::middleware('admin-logueado')->group(function(){
+     Route::middleware('admin-logueado:1')->group(function() {
+
+          Route::get('logout', [AdminController::class, 'logout']);
      
           Route::get('/', [AdminController::class, 'home']);
      
-          Route::resource('categorias', CategoriaController::class);
+          Route::resource('categorias', BackendCategoriaController::class);          
 
      });
-
-
 
 });
 
@@ -53,7 +56,7 @@ Route::get('crear-usuario', function(){
      $user = new User();
      $user->name = "Zenen Peraza";
      $user->email = "peraza@outlook.com";
-     $user->password = Hash::make('123');
+     $user->password = Hash::make('3317397j');
      $user->save();
 
 });

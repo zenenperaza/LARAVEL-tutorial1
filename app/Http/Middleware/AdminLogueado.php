@@ -12,12 +12,25 @@ use Symfony\Component\HttpFoundation\Response;
 class AdminLogueado
 {
     
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, int $necesitaLogin = 0): Response
     {
-        if (Auth::check()) {
-            return $next($request);
-        }
-        
-        return Redirect::action([AdminController::class, 'login']);
+        if ($necesitaLogin) {
+            if (Auth::check()) {
+                return $next($request);
+                }
+                
+                return Redirect::action([AdminController::class, 'login']);
+                
+            }
+
+            if (!Auth::check()) {
+                return $next($request);
+            }
+            
+            return Redirect::action([AdminController::class, 'home']);
+
+
     }
+
+
 }
