@@ -37,7 +37,9 @@ class CategoriaController extends Controller
         $categoria->nombre = $request->input('nombre');
         $categoria->save();
 
-        return Redirect::action([CategoriaController::class, 'index']);
+        return Redirect::action([CategoriaController::class, 'index'])->with([
+            'success' => 'La categoria ha sido creada',
+        ]) ;
     }
 
     /**
@@ -68,7 +70,9 @@ class CategoriaController extends Controller
         $categoria->nombre = $nombre;
         $categoria->save();
 
-        return Redirect::action([CategoriaController::class, 'index']);
+        return Redirect::action([CategoriaController::class, 'index'])->with([
+            'success' => 'La categoria ha sido modificada',
+        ]) ;
     }
 
     /**
@@ -76,6 +80,10 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+
+        return Redirect::action([CategoriaController::class, 'index'])->with([
+            'success' => 'La categoria ha sido Eliminada',
+        ]) ;
     }
 }
