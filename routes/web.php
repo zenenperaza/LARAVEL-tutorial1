@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoriaController as BackendCategoriaController;
+use App\Http\Controllers\Backend\ProductoController as BackendProductoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
@@ -46,7 +47,9 @@ Route::prefix('admin')->group(function(){
      
           Route::get('/', [AdminController::class, 'home']);
      
-          Route::resource('categorias', BackendCategoriaController::class);          
+          Route::resource('categorias', BackendCategoriaController::class);   
+          
+          Route::resource('productos', BackendProductoController::class);
 
      });
 
