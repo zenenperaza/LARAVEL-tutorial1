@@ -42,7 +42,8 @@
               </div>
             </div>
           </nav>
-    
+
+          @yield('librerias')         
        
     </header>
 

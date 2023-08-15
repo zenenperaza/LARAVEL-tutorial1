@@ -11,7 +11,8 @@
         
         <form method="post" action=" {{ action([ App\Http\Controllers\Backend\ProductoController::class, 'update'], $producto->id) }} ">
             @csrf
-            <input type="hidden" name="_method" value="patch">
+            @method('PATCH')
+            {{-- <input type="hidden" name="_method" value="patch"> --}}
 
             <div class="row">
 
