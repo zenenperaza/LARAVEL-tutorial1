@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    
+    @vite('resources/js/carrito.js')
+    @yield('librerias')   
+
+    <style>
+      footer.text-center.text-lg-start.bg-light.text-muted {
+    position: absolute;
+    bottom: 0;
+}
+    </style>
+
   </head>
   <body>
     <h1>Curso de Laravel 10!</h1>
@@ -39,11 +51,12 @@
                     </ul>
                   </li>
                 </ul>
+                <div id="carrito" class="align-items-rigth">
+
+                </div>
               </div>
             </div>
-          </nav>
-
-          @yield('librerias')         
+          </nav>      
        
     </header>
 
@@ -53,6 +66,13 @@
 
  
     </main>
+
+
+
+
+
+
+
 
         <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">

@@ -3,32 +3,32 @@
 		<div class="row align-items-center">
 
 			<div class="col-12 col-sm-6">
-				<img src="https://detallesorballo.com/wp-content/uploads/2020/09/imagen-de-prueba-320x240-1.jpg" class="img-fluid" />
+				<img src="https://elmundoenrecetas.s3.amazonaws.com/uploads/recipe/main_image/948/espaguetis_con_tomate.webp" class="img-fluid" />
 			</div>
 
 			<div class="col-12 col-sm-6">
 
 				<div class="row">
 					<div class="col-12">
-						<h1>{{ nombre }}</h1>
+						<h1>{{ producto.nombre }}</h1>
 					</div>
 
 					<div class="col-12">
 						<p>DESCRIPCIÓN DEL PRODUCTO</p>
+						<p>{{ producto.imagen }}</p>
 					</div>
 
 					<div class="col-12">
-						<h6><strong>PRECIO:</strong> ${{ precio }}</h6>
+						<h6><strong>PRECIO:</strong> ${{ producto.precio }}</h6>
 					</div>
 
 					<div class="col-12">
-						<h6><strong>STOCK:</strong> {{ stock }}</h6>
+						<h6><strong>STOCK:</strong> {{ producto.stock }}</h6>
 					</div>
 
 					<div class="col-12 mt-3">
 						<AgregarAlCarrito
-							:id="props.id"
-							:stock="stock" />
+							:producto="producto" />
 					</div>
 				</div>
 
@@ -41,6 +41,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import AgregarAlCarrito from "@/components/Productos/AgregarAlCarrito.vue";
+import {useCarritoStore} from "@/stores/carrito";
 
 // Props
 const props = defineProps({
@@ -50,10 +51,11 @@ const props = defineProps({
 	},
 });
 
+// Store
+const store = useCarritoStore();
+
 // Data
-const nombre = ref("");
-const precio = ref(0);
-const stock = ref(0);
+const producto = ref({});
 
 // Eventos
 onMounted( () => {
@@ -62,14 +64,11 @@ onMounted( () => {
 	axios
 		.get('/api/productos/'+props.id)
 		.then( (responseProducto) => {
-
-			const producto = responseProducto.data;
-
-			// Setiamos variables del componente
-			nombre.value = producto.nombre;
-			precio.value = producto.precio;
-			stock.value = producto.stock;
+			producto.value = responseProducto.data;
 		});
+
+	// Traer productos del local storage
+	store.obtenerProductos();
 
 });
 
