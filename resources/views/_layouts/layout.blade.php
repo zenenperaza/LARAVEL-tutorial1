@@ -11,9 +11,12 @@
     @yield('librerias')   
 
     <style>
-      footer.text-center.text-lg-start.bg-light.text-muted {
-    position: absolute;
+      footer {
+    position: static;
     bottom: 0;
+}
+main {
+    margin-bottom: 563px;
 }
     </style>
 
