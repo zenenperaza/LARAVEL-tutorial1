@@ -5,11 +5,8 @@
 @endsection
 
 @section('main')
-<div class="container" id="proceso_de_compra">   
 
-
+<div class="container" id="proceso_de_compra">  
 </div>
-
-
     
 @endsection
