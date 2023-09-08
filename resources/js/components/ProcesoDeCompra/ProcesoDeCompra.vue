@@ -4,13 +4,16 @@
     <div class="container-fluid">
         <div class="row">
             <Productos
-                v-if="paso === 1" />
+                v-show="paso === 1" />
             
             <DatosDelComprador
-				v-if="paso === 2" />
+				v-show="paso === 2" />
 
             <MetodoDeEntrega
-                v-if="paso === 3" />
+                v-show="paso === 3" />
+                
+            <ResumenDeCompra
+                v-show="paso === 4" />
 
         </div>
 
@@ -21,8 +24,13 @@
                 @click="pasoAnterior" >Anterior</button>  
 
                 <button type="button " class="btn btn-primary "
+                v-if="paso !== 4"
                 :disabled="paso === 4"
                 @click="pasoSiguiente">Siguiente</button>
+
+                <button type="button " class="btn btn-primary "
+                v-if="paso === 4"
+                @click="finalizarCompra">Finalizar</button>
 
         </div>
     </div>
@@ -35,6 +43,7 @@ import { useCarritoStore } from "@/stores/carrito";
 import Productos from '@/components/ProcesoDeCompra/Productos.vue';
 import DatosDelComprador from '@/components/ProcesoDeCompra/DatosDelComprador.vue'
 import MetodoDeEntrega from '@/components/ProcesoDeCompra/MetodoDeEntrega.vue'
+import ResumenDeCompra from '@/components/ProcesoDeCompra/ResumenDeCompra.vue';
 
 const store = useCarritoStore()
 
@@ -46,6 +55,10 @@ const pasoAnterior = () => {
 }
 const pasoSiguiente = () => {
     paso.value++
+}
+
+const finalizarCompra = () => {
+    console.log('12');
 }
 
 onMounted(() => {
